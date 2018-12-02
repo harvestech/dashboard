@@ -13,10 +13,13 @@ var sass = require("gulp-sass"), // переводит SASS в CSS
     addsrc = require('gulp-add-src'),
     minifyCSS = require('gulp-minify-css'), // Минимизация css
     clean = require('gulp-clean'),
+    gzip = require('gulp-gzip'),
     server = require( 'gulp-develop-server' ),
     browserSync = require( 'browser-sync' ),
     preprocess = require('gulp-preprocess'),
     watch = require('gulp-watch'),
+    gutil = require('gulp-util'),
+    ftp = require('vinyl-ftp'),
     gulpsync = require('gulp-sync')(gulp)
 
     // Пути для сборки
@@ -26,7 +29,9 @@ var path = {
       js: 'build/',
       css: 'build/',
       fonts: 'build/',
-      img: 'build/'
+      img: 'build/',
+      allfiles: './build/*.*',
+      gzip: 'build/gzip/'
   },
   src: {
       root: 'src/',
@@ -167,6 +172,27 @@ gulp.task('img', function() {
       .pipe(gulp.dest(path.build.img));
 });
 
+// Архивация файлов в gzip
+gulp.task('gzip', function() {
+  return gulp.src(path.build.allfiles)
+    .pipe(gzip())
+    .pipe(gulp.dest(path.build.gzip));
+});
+//Загрузка на ftp Arduino - НЕ РАБОТАЕТ
+gulp.task('ftp', function () {
+  var conn = ftp.create( {
+      host:     '192.168.0.23',
+      user:     'esp8266wf',
+      password: 'KJah8876',
+      parallel: 10,
+      maxConnections: 1
+    });
+  var globs = [ 'build/gzip/**' ];
+  return gulp.src( globs, { base: './build/gzip/', buffer: false } )
+  .pipe(conn.dest('/'));
+});
+
+
 // Слежение изменились ли файлы
 gulp.task('watch', function() {
     watch([path.watch.html], function(event, cb) {
@@ -177,6 +203,12 @@ gulp.task('watch', function() {
     });
     watch([path.watch.js]).on('change', browserSync.reload);
 });
+
+// Создание gzip и загрузка этих файлов на esp по ftp
+gulp.task('esp', gulpsync.sync([
+  'gzip',
+  'ftp'
+]));
 
 // Режим разработки
 gulp.task('develop', gulpsync.sync([
