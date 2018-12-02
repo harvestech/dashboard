@@ -8,7 +8,6 @@ textarea{
 h1,h2,h3,h4,h5,h6{
     font-weight: $font-weight-normal;
 }
-
 a{
     color: $primary-color;
     &:hover,
@@ -94,7 +93,6 @@ p{
 }
 .category,
 .card-category{
-    text-transform: capitalize;
     font-weight: $font-weight-normal;
     color: $dark-gray;
     font-size: $font-size-mini;

@@ -3,103 +3,208 @@ var gulp = require('gulp');
 const htmlPartial = require('gulp-html-partial');
 
 var sass = require("gulp-sass"), // переводит SASS в CSS
-    cssnano = require("gulp-cssnano"), // Минимизация CSS
     autoprefixer = require('gulp-autoprefixer'), // Проставлет вендорные префиксы в CSS для поддержки старых браузеров
     imagemin = require('gulp-imagemin'), // Сжатие изображение
     concat = require("gulp-concat"), // Объединение файлов - конкатенация
     uglify = require("gulp-uglify"), // Минимизация javascript
-    rename = require("gulp-rename"), // Переименование файлов
+    //rename = require("gulp-rename"), // Переименование файлов
     path = require('path'),
     sourcemaps = require('gulp-sourcemaps'),
-    open = require('gulp-open'),
-    rigger = require('gulp-rigger'),
     addsrc = require('gulp-add-src'),
-    sourcemaps = require('gulp-sourcemaps'),
-    minifyCSS = require('gulp-minify-css');
+    minifyCSS = require('gulp-minify-css'), // Минимизация css
+    clean = require('gulp-clean'),
+    server = require( 'gulp-develop-server' ),
+    browserSync = require( 'browser-sync' ),
+    preprocess = require('gulp-preprocess'),
+    watch = require('gulp-watch'),
+    gulpsync = require('gulp-sync')(gulp)
 
-var Paths = {
-  HERE: './',
-  DIST: 'dist/css/',
-  CSS: './src/css/',
-  SCSS_TOOLKIT_SOURCES: './src/scss/paper-dashboard.scss',
-  SCSS: './src/scss/**/**'
+    // Пути для сборки
+var path = {
+  build: {
+      root: 'build/',
+      js: 'build/',
+      css: 'build/',
+      fonts: 'build/',
+      img: 'build/'
+  },
+  src: {
+      root: 'src/',
+      html: 'src/html/*.html',
+      fonts: 'src/fonts/*.*',
+      inc: 'src/html/includes/',
+      js: 'src/js/**/*.js',
+      scripts: 'src/js/**/*.js',
+      sass: 'src/scss/paper-dashboard.scss',
+      css: 'src/css/',
+      img: 'src/img/*.+(jpg|jpeg|png|gif)'
+  },
+  watch: {
+      html: 'src/html/**/*.html',
+      sass: 'src/scss/**/*.scss',
+      js:   'src/js/**/*.js'
+  },
+  clean: ['build', 'src/index.html']
 };
 
-// Копирование файлов HTML в папку dist
-gulp.task("html", function() {
-  return gulp.src("src/html/views/*.html")
-  .pipe(htmlPartial({
-    basePath: 'src/html/includes/'
-  }))
-  .pipe(gulp.dest("dist"));
+// Конфиги для локального вебсервера
+var webserver = {
+  dev: {
+      server: {
+          baseDir: './src'
+      },
+      tunnel: true,
+      host: 'localhost',
+      port: 9001,
+      logPrefix: 'app_dev'
+  },
+  prod: {
+      server: {
+          baseDir: './build'
+      },
+      tunnel: true,
+      host: 'localhost',
+      port: 9002,
+      logPrefix: 'app_prod'
+  }
+};    
+
+// Очистка папок и файлов
+gulp.task('clean', function() {
+  return gulp.src(path.clean, {read: false})
+      .pipe(clean());
 });
 
-// Копирование файлов demo в папку dist
+// production
+gulp.task('sass:prod', function() {
+  return gulp.src(path.src.sass)
+      .pipe(sass({outputStyle: 'compressed'}))
+      .pipe(gulp.dest(path.build.css));
+});
+
+// Запуск локального веб-сервера
+// development
+gulp.task('webserver:dev', function () {
+  browserSync(webserver.dev);
+});
+
+// production
+gulp.task('webserver:prod', function () {
+  browserSync(webserver.prod);
+});  
+
+// Препроцессинг html
+// development
+gulp.task('html:dev', function() {
+  gulp.src(path.src.html)
+      .pipe(htmlPartial({
+        basePath: path.src.inc
+      }))
+      .pipe(preprocess({context: {NODE_ENV: 'development', DEBUG: true}}))
+      .pipe(gulp.dest(path.src.root))
+      .pipe(browserSync.reload({stream: true}));
+});
+
+// production
+gulp.task('html:prod', function() {
+  gulp.src(path.src.html)
+      .pipe(htmlPartial({
+        basePath: path.src.inc
+      }))
+      .pipe(preprocess({context: {NODE_ENV: 'production', DEBUG: true}}))
+      .pipe(gulp.dest(path.build.root))
+});
+
+// Копирование файлов fonts в папку продакшена
 gulp.task("fonts", function() {
-  return gulp.src("src/fonts/*.*")
-  .pipe(gulp.dest("dist/fonts"));
+  return gulp.src(path.src.fonts)
+  .pipe(gulp.dest(path.build.fonts));
 });
 
-// Копирование файлов demo в папку dist
-gulp.task("demo", function() {
-  return gulp.src("src/demo/*.*")
-  .pipe(gulp.dest("dist/demo"));
+// Компиляция sass, сборка стилей
+// Development
+gulp.task('sass-css:dev', function() {
+  return gulp.src(path.src.sass)
+      .pipe(sourcemaps.init())
+      .pipe(sass())
+      .pipe(preprocess({ context: { NODE_ENV: "development", DEBUG: true } })) // To set environment variables in-line
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(path.src.css))
+      .pipe(browserSync.reload({stream: true}));
 });
 
-// CSS & Less
-gulp.task('css', function(){
-  gulp.src('src/css/bootstrap.min.css')
-      .pipe(addsrc.append('src/css/paper-dashboard.min.css'))
-      .pipe(addsrc.append('src/css/font-awesome.min.css'))
-      .pipe(concat('style.css'))
-      .pipe(minifyCSS())
-      .pipe(rename({ suffix: '.min' })) 
-      .pipe(gulp.dest('dist/css'));
-});
-
-gulp.task('compile-scss', function() {
-  return gulp.src(Paths.SCSS_TOOLKIT_SOURCES)
+// Компиляция sass, сборка стилей
+// Production
+gulp.task('sass-css:prod',  function() {
+  return gulp.src(path.src.sass)
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer())
-    .pipe(sourcemaps.write(Paths.HERE))
-    .pipe(gulp.dest(Paths.DIST));
-});
+    .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(addsrc.append('src/css/main.css'))
+    .pipe(addsrc.append('src/css/bootstrap.min.css'))
+    .pipe(addsrc.append('src/css/font-awesome.css'))
+    .pipe(addsrc.append('src/css/c3.css'))
+    .pipe(concat('styles.css'))
+    .pipe(preprocess({ context: { NODE_ENV: "production", DEBUG: true } })) // To set environment variables in-line
+    .pipe(minifyCSS())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(path.build.css));
+}); 
 
 gulp.task('scripts', function() {
   gulp.src('src/js/core/jquery.min.js')
     .pipe(addsrc.append('src/js/core/popper.min.js'))
     .pipe(addsrc.append('src/js/core/bootstrap.min.js'))
     .pipe(addsrc.append('src/js/plugins/perfect-scrollbar.jquery.min.js'))
-    .pipe(addsrc.append('src/js/plugins/chartjs.min.js'))
     .pipe(addsrc.append('src/js/plugins/bootstrap-notify.js'))
-    .pipe(addsrc.append('src/js/paper-dashboard.min.js'))
-    .pipe(addsrc.append('src/demo/demo.js'))
+    .pipe(addsrc.append('src/js/paper-dashboard.js'))
+    .pipe(addsrc.append('src/js/charts/c3.min.js'))
+    .pipe(addsrc.append('src/js/charts/d3.v5.min.js'))
     .pipe(concat('scripts.js'))
     .pipe(uglify())
-    .pipe(rename({ suffix: '.min' })) 
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest(path.build.js));
 });
 
 // Сжимаем картинки
-gulp.task('imgs', function() {
-  return gulp.src("src/img/*.+(jpg|jpeg|png|gif)")
+gulp.task('img', function() {
+  return gulp.src(path.src.img)
       .pipe(imagemin({
           progressive: true,
           svgoPlugins: [{ removeViewBox: false }],
           interlaced: true
       }))
-      .pipe(gulp.dest("dist/img"))
+      .pipe(gulp.dest(path.build.img));
 });
 
+// Слежение изменились ли файлы
 gulp.task('watch', function() {
-  gulp.watch(Paths.SCSS, ['compile-scss']);
+    watch([path.watch.html], function(event, cb) {
+        gulp.start('html:dev');
+    });
+    watch([path.watch.sass], function(event, cb) {
+        gulp.start('sass-css:dev');
+    });
+    watch([path.watch.js]).on('change', browserSync.reload);
 });
 
-gulp.task('open', function() {
-  gulp.src('dist/dashboard.html')
-    .pipe(open());
-});
+// Режим разработки
+gulp.task('develop', gulpsync.sync([
+  'clean',
+  [
+      'html:dev',
+      'sass-css:dev'
+  ],
+  'watch',
+  'webserver:dev'
+]));
 
-
-gulp.task('default', ['html', 'scripts', 'compile-scss','css', 'imgs', 'fonts', 'demo']);
+// Режим production
+gulp.task('production', gulpsync.sync([
+  'clean',
+  [
+      'html:prod',
+      'sass-css:prod',
+      'img',
+      'fonts',
+      'scripts'
+  ]
+])); 

@@ -5,11 +5,16 @@
     <div class="logo">
       <a href="http://www.creative-tim.com" class="simple-text logo-mini">
         <div class="logo-image-small">
-          <img src="../src/img/logo-small.png">
+          <!-- @if NODE_ENV='development' -->
+          <img src="img/logo-small.png">
+          <!-- @endif -->
+          <!-- @if NODE_ENV='production' -->
+          <img src="logo-small.png">
+          <!-- @endif -->
         </div>
       </a>
       <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-        Creative Tim
+        HARVESTECH
         <!-- <div class="logo-image-big">
           <img src="../src/img/logo-big.png">
         </div> -->
