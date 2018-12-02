@@ -7,8 +7,14 @@
  */
 .pump{
     margin: 0 10px 0 5px;
-    font-size: 20px;
+    font-size: 14px;
 }
 .inline{
-    display: inline;
+    display: inline-block;
+    margin: 0 0.5em 0 0.5em;
 }
+
+.c3-legend-item-tile {
+    width: 20px;
+    height: 20px;
+  }

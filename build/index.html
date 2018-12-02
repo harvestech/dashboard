@@ -16,13 +16,13 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     
-    <body class="">
+    <body onload="process();" class="">
         <div class="wrapper ">
             <!-- Sidebar -->
             <div class="sidebar" data-color="white" data-active-color="danger">
                 <!-- Tip 1: You can change the color of the sidebar using: data-color="blue
                 | green | orange | red | yellow" -->
-                <div class="logo"> <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                <div class="logo"> <a href="http://www.creative-tim.com" class="simple-text logo-mini text-center">
 
         <div class="logo-image-small">
 
@@ -33,7 +33,7 @@
         </div>
 
       </a>
- <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+ <a href="http://www.creative-tim.com" class="simple-text text-center logo-normal">
 
         HARVESTECH
 
@@ -47,43 +47,43 @@
                 </div>
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                        <li class="active "> <a href="./dashboard.html">
+                        <li class="active "> <a href="./index.html">
 
             <i class="nc-icon nc-bank"></i>
 
-            <p>Dashboard</p>
+            <p>Главная панель</p>
 
           </a>
                         </li>
-                        <li> <a href="./icons.html">
+                        <li> <a href="./pumps.html">
 
             <i class="nc-icon nc-diamond"></i>
 
-            <p>Icons</p>
+            <p>Насосы</p>
 
           </a>
                         </li>
-                        <li> <a href="./map.html">
+                        <li> <a href="./sensors.html">
 
             <i class="nc-icon nc-pin-3"></i>
 
-            <p>Maps</p>
+            <p>Датчики</p>
 
           </a>
                         </li>
-                        <li> <a href="./notifications.html">
+                        <li> <a href="./regulator.html">
 
             <i class="nc-icon nc-bell-55"></i>
 
-            <p>Notifications</p>
+            <p>Регулятор</p>
 
           </a>
                         </li>
-                        <li> <a href="./user.html">
+                        <li> <a href="./system.html">
 
             <i class="nc-icon nc-single-02"></i>
 
-            <p>User Profile</p>
+            <p>Система</p>
 
           </a>
                         </li>
@@ -103,11 +103,11 @@
 
           </a>
                         </li>
-                        <li class="active-pro"> <a href="./upgrade.html">
+                        <li class="active-pro"> <a href="./master.html">
 
             <i class="nc-icon nc-spaceship"></i>
 
-            <p>Upgrade to PRO</p>
+            <p>Мастер настройки</p>
 
           </a>
                         </li>
@@ -198,13 +198,13 @@
                                 <div class="card-body ">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-globe text-warning"></i>
+                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-bulb-63 text-warning"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
                                                 <p class="card-category">Кислотность</p>
-                                                <p class="card-title">10,912
+                                                <p class="card-title"><span id="now_ph">...</span>
                                                     <p>
                                             </div>
                                         </div>
@@ -221,13 +221,13 @@
                                 <div class="card-body ">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-money-coins text-success"></i>
+                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-bulb-63 text-success"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
                                                 <p class="card-category">Проводимость</p>
-                                                <p class="card-title">2,345
+                                                <p class="card-title"><span id="now_ec">...</span>
                                                     <p>
                                             </div>
                                         </div>
@@ -244,13 +244,13 @@
                                 <div class="card-body ">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-vector text-danger"></i>
+                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-bulb-63 text-danger"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
-                                                <p class="card-category">Тепмература</p>
-                                                <p class="card-title">23
+                                                <p class="card-category">Температура</p>
+                                                <p class="card-title"><span id="now_temp">...</span>
                                                     <p>
                                             </div>
                                         </div>
@@ -267,13 +267,13 @@
                                 <div class="card-body ">
                                     <div class="row">
                                         <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                            <div class="icon-big text-center icon-warning"> <i class="nc-icon nc-watch-time text-primary"></i>
                                             </div>
                                         </div>
                                         <div class="col-7 col-md-8">
                                             <div class="numbers">
                                                 <p class="card-category">Время</p>
-                                                <p class="card-title">10:11
+                                                <p class="card-title"><span id="nowtime">...</span>
                                                     <p>
                                             </div>
                                         </div>
@@ -281,7 +281,8 @@
                                 </div>
                                 <div class="card-footer ">
                                     <hr>
-                                    <div class="stats"> <i class="fa fa-timer-0"></i> Время работы: 07:11:07</div>
+                                    <div class="stats"> <i class="fa fa-timer-0"></i> Время работы: <span id="runtime">...</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -310,16 +311,22 @@
                                 <div class="card-header ">
                                      <h5 class="card-title">Активность насосов</h5>
                                 </div>
-                                <div class="card-body text-center"> <i class="fa fa-circle text-danger"></i> 
-                                     <h6 class="pump inline">PH (&uarr;)</h6>
- <i class="fa fa-circle text-success"></i> 
-                                     <h6 class="pump inline">PH (&darr;)</h6>
- <i class="fa fa-circle text-success"></i> 
-                                     <h6 class="pump inline">Удобрение А</h6>
- <i class="fa fa-circle text-danger"></i> 
-                                     <h6 class="pump inline">Удобрение B</h6>
- <i class="fa fa-circle text-success"></i> 
-                                     <h6 class="pump inline">Удобрение C</h6>
+                                <div class="card-body text-center">
+                                    <div class="inline"><i id="pumpState1" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">PH (&uarr;)</h6>
+                                    </div>
+                                    <div class="inline"><i id="pumpState2" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">PH (&darr;)</h6>
+                                    </div>
+                                    <div class="inline"><i id="pumpState3" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">Удобрение А</h6>
+                                    </div>
+                                    <div class="inline"><i id="pumpState4" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">Удобрение B</h6>
+                                    </div>
+                                    <div class="inline"><i id="pumpState5" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">Удобрение C</h6>
+                                    </div>
                                 </div>
                                 <div class="card-footer ">
                                     <hr>
@@ -332,10 +339,13 @@
                                 <div class="card-header">
                                      <h5 class="card-title">Активность нагрузок</h5>
                                 </div>
-                                <div class="card-body text-center"> <i class="fa fa-circle text-danger"></i> 
-                                     <h6 class="pump inline">Нагрузка 1</h6>
- <i class="fa fa-circle text-success"></i> 
-                                     <h6 class="pump inline">Нагрузка 2</h6>
+                                <div class="card-body text-center">
+                                    <div class="inline"><i id="powerState1" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">Нагрузка 1</h6>
+                                    </div>
+                                    <div class="inline"><i id="powerState2" class="fa fa-circle text-danger"></i> 
+                                         <h6 class="pump inline">Нагрузка 2</h6>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <hr/>
@@ -350,11 +360,7 @@
                         <div class="row">
                             <nav class="footer-nav">
                                 <ul>
-                                    <li> <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                                    </li>
-                                    <li> <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                                    </li>
-                                    <li> <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
+                                    <li> <a href="https://www.creative-tim.com" target="_blank">Our site</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -366,7 +372,7 @@
 
                   document.write(new Date().getFullYear())
 
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                </script>, made by Vladislav I.
 
               </span>
                             </div>
@@ -377,19 +383,6 @@
         </div>
         <!-- Core JS Files -->
         <script src="scripts.js"></script>
-        <script>
-            $(document).ready(function() {
-              var chart = c3.generate({
-        				bindto: '#chart',
-        				data: {
-        				  columns: [
-        					['data1', 30, 200, 100, 400, 150, 250],
-        					['data2', 50, 20, 10, 40, 15, 25]
-        				  ]
-        				}
-              });
-            });
-        </script>
     </body>
 
 </html>

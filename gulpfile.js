@@ -75,13 +75,6 @@ gulp.task('clean', function() {
       .pipe(clean());
 });
 
-// production
-gulp.task('sass:prod', function() {
-  return gulp.src(path.src.sass)
-      .pipe(sass({outputStyle: 'compressed'}))
-      .pipe(gulp.dest(path.build.css));
-});
-
 // Запуск локального веб-сервера
 // development
 gulp.task('webserver:dev', function () {
@@ -132,7 +125,6 @@ gulp.task('sass-css:dev', function() {
       .pipe(gulp.dest(path.src.css))
       .pipe(browserSync.reload({stream: true}));
 });
-
 // Компиляция sass, сборка стилей
 // Production
 gulp.task('sass-css:prod',  function() {
@@ -141,7 +133,6 @@ gulp.task('sass-css:prod',  function() {
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(addsrc.append('src/css/main.css'))
     .pipe(addsrc.append('src/css/bootstrap.min.css'))
-    .pipe(addsrc.append('src/css/font-awesome.css'))
     .pipe(addsrc.append('src/css/c3.css'))
     .pipe(concat('styles.css'))
     .pipe(preprocess({ context: { NODE_ENV: "production", DEBUG: true } })) // To set environment variables in-line
@@ -152,13 +143,14 @@ gulp.task('sass-css:prod',  function() {
 
 gulp.task('scripts', function() {
   gulp.src('src/js/core/jquery.min.js')
-    .pipe(addsrc.append('src/js/core/popper.min.js'))
+    //.pipe(addsrc.append('src/js/core/popper.min.js'))
     .pipe(addsrc.append('src/js/core/bootstrap.min.js'))
     .pipe(addsrc.append('src/js/plugins/perfect-scrollbar.jquery.min.js'))
     .pipe(addsrc.append('src/js/plugins/bootstrap-notify.js'))
     .pipe(addsrc.append('src/js/paper-dashboard.js'))
-    .pipe(addsrc.append('src/js/charts/c3.min.js'))
-    .pipe(addsrc.append('src/js/charts/d3.v5.min.js'))
+    .pipe(addsrc.append('src/js/charts/c3.js'))
+    .pipe(addsrc.append('src/js/charts/d3.v5.js'))
+    .pipe(addsrc.append('src/js/arduino.js'))
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));

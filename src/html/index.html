@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="apple-icon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     HASVESTECH - Панель управления
@@ -16,7 +16,6 @@
   <!-- @if NODE_ENV='development' -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/c3.css">
   <link rel="stylesheet" href="css/paper-dashboard.css">
   <!-- @endif -->
@@ -26,7 +25,7 @@
   <!-- @endif --> 
 </head>
 
-<body class="">
+<body onload="process();" class="">
   <div class="wrapper ">
     <!-- Sidebar -->
     <partial src="sidebar.html"></partial>
@@ -49,14 +48,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                      <i class="nc-icon nc-bulb-63 text-warning"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Кислотность</p>
-                      <p class="card-title">10,912
-                        <p>
+                      <p class="card-title"><span id="now_ph">...</span><p>
                     </div>
                   </div>
                 </div>
@@ -75,14 +73,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-money-coins text-success"></i>
+                      <i class="nc-icon nc-bulb-63 text-success"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Проводимость</p>
-                      <p class="card-title">2,345
-                        <p>
+                      <p class="card-title"><span id="now_ec">...</span><p>
                     </div>
                   </div>
                 </div>
@@ -101,14 +98,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
+                      <i class="nc-icon nc-bulb-63 text-danger"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Тепмература</p>
-                      <p class="card-title">23
-                        <p>
+                      <p class="card-category">Температура</p>
+                      <p class="card-title"><span id="now_temp">...</span><p>
                     </div>
                   </div>
                 </div>
@@ -127,14 +123,13 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-favourite-28 text-primary"></i>
+                      <i class="nc-icon nc-watch-time text-primary"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Время</p>
-                      <p class="card-title">10:11
-                        <p>
+                      <p class="card-title"><span id="nowtime">...</span><p>
                     </div>
                   </div>
                 </div>
@@ -142,7 +137,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-timer-0"></i> Время работы: 07:11:07
+                  <i class="fa fa-timer-0"></i> Время работы: <span id="runtime">...</span>
                 </div>
               </div>
             </div>
@@ -175,11 +170,11 @@
                 <h5 class="card-title">Активность насосов</h5>
               </div>
               <div class="card-body text-center">
-                <i class="fa fa-circle text-danger"></i> <h6 class="pump inline">PH (&uarr;)</h6>
-                <i class="fa fa-circle text-success"></i> <h6 class="pump inline">PH (&darr;)</h6>
-                <i class="fa fa-circle text-success"></i> <h6 class="pump inline">Удобрение А</h6>
-                <i class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение B</h6>
-							  <i class="fa fa-circle text-success"></i> <h6 class="pump inline">Удобрение C</h6>
+                <div class="inline"><i id="pumpState1" class="fa fa-circle text-danger"></i> <h6 class="pump inline">PH (&uarr;)</h6></div>
+                <div class="inline"><i id="pumpState2" class="fa fa-circle text-danger"></i> <h6 class="pump inline">PH (&darr;)</h6></div>
+                <div class="inline"><i id="pumpState3" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение А</h6></div>
+                <div class="inline"><i id="pumpState4" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение B</h6></div>
+							  <div class="inline"><i id="pumpState5" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение C</h6></div>
               </div>
               <div class="card-footer ">
                 <hr>
@@ -195,8 +190,8 @@
                 <h5 class="card-title">Активность нагрузок</h5>
               </div>
               <div class="card-body text-center">
-                <i class="fa fa-circle text-danger"></i> <h6 class="pump inline">Нагрузка 1</h6>
-                <i class="fa fa-circle text-success"></i> <h6 class="pump inline">Нагрузка 2</h6>
+                <div class="inline"><i id="powerState1" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Нагрузка 1</h6></div>
+                <div class="inline"><i id="powerState2" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Нагрузка 2</h6></div>
               </div>
               <div class="card-footer">
                 <hr/>
@@ -214,13 +209,7 @@
             <nav class="footer-nav">
               <ul>
                 <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                </li>
-                <li>
-                  <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                </li>
-                <li>
-                  <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
+                  <a href="https://www.creative-tim.com" target="_blank">Our site</a>
                 </li>
               </ul>
             </nav>
@@ -229,7 +218,7 @@
                 ©
                 <script>
                   document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                </script>, made by Vladislav I.
               </span>
             </div>
           </div>
@@ -245,26 +234,15 @@
   <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script src="js/plugins/bootstrap-notify.js"></script>
   <script src="js/paper-dashboard.js"></script>
-  <script src="js/charts/c3.min.js"></script>
+  <script src="js/charts/c3.js"></script>
   <script src="js/charts/d3.v5.min.js"></script>
+  <script src="js/arduino.js"></script>
   <!-- @endif -->
 
   <!-- @if NODE_ENV='production' -->
   <script src="scripts.js"></script>
   <!-- @endif -->
-  <script>
-    $(document).ready(function() {
-      var chart = c3.generate({
-				bindto: '#chart',
-				data: {
-				  columns: [
-					['data1', 30, 200, 100, 400, 150, 250],
-					['data2', 50, 20, 10, 40, 15, 25]
-				  ]
-				}
-      });
-    });
-  </script>
+
 </body>
 
 </html>
