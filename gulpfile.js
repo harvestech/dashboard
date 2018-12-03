@@ -35,7 +35,7 @@ var path = {
   },
   src: {
       root: 'src/',
-      html: 'src/html/*.html',
+      html: 'src/html/**/*.html',
       fonts: 'src/fonts/*.*',
       inc: 'src/html/includes/',
       js: 'src/js/**/*.js',
