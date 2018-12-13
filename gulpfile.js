@@ -20,6 +20,7 @@ var sass = require("gulp-sass"), // переводит SASS в CSS
     watch = require('gulp-watch'),
     gutil = require('gulp-util'),
     ftp = require('vinyl-ftp'),
+    purify = require('gulp-purifycss'),
     gulpsync = require('gulp-sync')(gulp)
 
     // Пути для сборки
@@ -133,14 +134,19 @@ gulp.task('sass-css:dev', function() {
 // Компиляция sass, сборка стилей
 // Production
 gulp.task('sass-css:prod',  function() {
+  //Создание отдельного файла с bootstarp (merge для него не работает)
+  gulp.src('src/css/bootstrap.min.css')
+    .pipe(concat('bs.css'))
+    .pipe(purify([path.src.js, path.src.html])) //поиск и удаление неиспользуемых кодов css
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(path.build.css));
+
   return gulp.src(path.src.sass)
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}))
-    .pipe(addsrc.append('src/css/main.css'))
-    .pipe(addsrc.append('src/css/bootstrap.min.css'))
-    .pipe(addsrc.append('src/css/c3.css'))
     .pipe(concat('styles.css'))
     .pipe(preprocess({ context: { NODE_ENV: "production", DEBUG: true } })) // To set environment variables in-line
+    .pipe(purify([path.src.js, path.src.html])) //поиск и удаление неиспользуемых кодов css
     .pipe(minifyCSS())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.build.css));
