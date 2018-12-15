@@ -53,7 +53,7 @@
 
           </a>
                         </li>
-                        <li class="active"> <a href="./pumps.html">
+                        <li class="@@pumps-page"> <a href="./pumps.html">
 
             <i class="nc-icon icon-pump"></i>
 
@@ -77,7 +77,7 @@
 
           </a>
                         </li>
-                        <li class="@@system-page"> <a href="./system.html">
+                        <li class="active"> <a href="./system.html">
 
             <i class="nc-icon icon-settings"></i>
 
@@ -184,7 +184,68 @@
               <canvas id="bigDashboardChart"></canvas>
 
       </div> -->
-                <div class="content"></div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="card-header ">
+                                     <h4 class="card-title">Данные для входа в панель</h4>
+                                </div>
+                                <div class="card-body ">
+                                    <form method="#" action="#">
+                                        <label>Логин</label>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Введите логин">
+                                        </div>
+                                        <label>Пароль</label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Введите пароль">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer ">
+                                    <button type="submit" class="btn btn-info btn-round">Применить</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="card-header ">
+                                     <h4 class="card-title">Параметры точки доступа</h4>
+                                </div>
+                                <div class="card-body ">
+                                    <form method="#" action="#">
+                                        <label>Имя (SSID)</label>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="HASVESTECH">
+                                        </div>
+                                        <label>Пароль</label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Введите пароль">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer ">
+                                    <button type="submit" class="btn btn-info btn-round">Применить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card ">
+                                <div class="card-header ">
+                                     <h5 class="card-title">Время и дата</h5>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control datetimepicker" value="10.12.2018">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <footer class="footer footer-black  footer-white ">
                     <div class="container-fluid">
                         <div class="row">
@@ -216,12 +277,23 @@
         <script src="js/core/popper.min.js"></script>
         <script src="js/core/bootstrap.min.js"></script>
         <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <script src="js/plugins/moment.min.js"></script>
+        <script src="js/plugins/bootstrap-datetimepicker.js"></script>
         <script src="js/plugins/bootstrap-notify.js"></script>
         <script src="js/paper-dashboard.js"></script>
         <script src="js/charts/c3.js"></script>
         <script src="js/charts/d3.v5.js"></script>
         <script src="js/arduino.js"></script>
         <script src="js/main.js"></script>
+        <script>
+            $(document).ready(function() {
+              // initialise Datetimepicker and Sliders
+              main.initDateTimePicker();
+              if ($('.slider').length != 0) {
+                main.initSliders();
+              }
+            });
+        </script>
     </body>
 
 </html>

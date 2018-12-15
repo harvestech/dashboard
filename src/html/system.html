@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="apple-icon.png">
+  <!-- @if NODE_ENV='development' -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <!-- @endif -->
+  <!-- @if NODE_ENV='production' -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- @endif -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    HASVESTECH - Панель управления
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!-- CSS Files -->
+  <!-- @if NODE_ENV='development' -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/paper-dashboard.css">
+  <!-- @endif -->
+
+  <!-- @if NODE_ENV='production' -->
+  <link rel="stylesheet" href="bs.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- @endif --> 
+</head>
+
+<body onload="process();" class="">
+  <div class="wrapper ">
+    <!-- Sidebar -->
+    <partial src="_sidebar.html" system-page="active"></partial>
+    <!-- End Sidebar -->
+    <div class="main-panel">
+      <!-- Navbar -->
+      <partial src="_navbar.html"></partial>
+      <!-- End Navbar -->
+      <!-- <div class="panel-header panel-header-lg">
+              <canvas id="bigDashboardChart"></canvas>
+      </div> -->
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card ">
+              <div class="card-header ">
+                <h4 class="card-title">Данные для входа в панель</h4>
+              </div>
+              <div class="card-body ">
+                <form method="#" action="#">
+                  <label>Логин</label>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Введите логин">
+                  </div>
+                  <label>Пароль</label>
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Введите пароль">
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer ">
+                <button type="submit" class="btn btn-info btn-round">Применить</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card ">
+              <div class="card-header ">
+                <h4 class="card-title">Параметры точки доступа</h4>
+              </div>
+              <div class="card-body ">
+                <form method="#" action="#">
+                  <label>Имя (SSID)</label>
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="HASVESTECH">
+                  </div>
+                  <label>Пароль</label>
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Введите пароль">
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer ">
+                <button type="submit" class="btn btn-info btn-round">Применить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Время и дата</h5>
+              </div>
+              <div class="card-body ">
+                <div class="form-group">
+                  <input type="text" class="form-control datetimepicker" value="10.12.2018">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li>
+                  <a href="https://www.creative-tim.com" target="_blank">Our site</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                ©
+                <script>
+                  document.write(new Date().getFullYear())
+                </script>, made by Vladislav I.
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <!-- @if NODE_ENV='development' -->
+  <script src="js/core/jquery.min.js"></script>
+  <script src="js/core/popper.min.js"></script>
+  <script src="js/core/bootstrap.min.js"></script>
+  <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+  <script src="js/plugins/moment.min.js"></script>
+  <script src="js/plugins/bootstrap-datetimepicker.js"></script>
+
+  <script src="js/plugins/bootstrap-notify.js"></script>
+  <script src="js/paper-dashboard.js"></script>
+  <script src="js/charts/c3.js"></script>
+  <script src="js/charts/d3.v5.js"></script>
+  <script src="js/arduino.js"></script>
+  <script src="js/main.js"></script>
+  <!-- @endif -->
+
+  <!-- @if NODE_ENV='production' -->
+  <script src="scripts.js"></script>
+  <script src="system.js"></script>
+  <!-- @endif -->
+
+  <script>
+    $(document).ready(function() {
+      // initialise Datetimepicker and Sliders
+      main.initDateTimePicker();
+      if ($('.slider').length != 0) {
+        main.initSliders();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
