@@ -3,18 +3,12 @@
 @font-face {
     font-family: 'Montserrat';
     /* @if NODE_ENV=='development' */
-	src: url('../fonts/Montserrat-ExtraLight.eot');
 	src: local('Montserrat ExtraLight'), local('Montserrat-ExtraLight'),
-		url('../fonts/Montserrat-ExtraLight.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Montserrat-ExtraLight.woff') format('woff'),
-        url('../fonts/Montserrat-ExtraLight.ttf') format('truetype');
+		url('../fonts/Montserrat-ExtraLight.woff') format('woff');
     /* @endif */
     /* @if NODE_ENV=='production' */
-    src: url('Montserrat-ExtraLight.eot');
 	src: local('Montserrat ExtraLight'), local('Montserrat-ExtraLight'),
-		url('Montserrat-ExtraLight.eot?#iefix') format('embedded-opentype'),
-		url('Montserrat-ExtraLight.woff') format('woff'),
-        url('Montserrat-ExtraLight.ttf') format('truetype');
+		url('Montserrat-ExtraLight.woff') format('woff');
     /* @endif */
 	font-weight: 200;
 	font-style: normal;
@@ -23,18 +17,12 @@
 @font-face {
     font-family: 'Montserrat';
     /* @if NODE_ENV=='development' */
-	src: url('../fonts/Montserrat-Bold.eot');
 	src: local('Montserrat Bold'), local('Montserrat-Bold'),
-		url('../fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Montserrat-Bold.woff') format('woff'),
-        url('../fonts/Montserrat-Bold.ttf') format('truetype');
+		url('../fonts/Montserrat-Bold.woff') format('woff');
     /* @endif */
     /* @if NODE_ENV=='production' */
-    src: url('Montserrat-Bold.eot');
 	src: local('Montserrat Bold'), local('Montserrat-Bold'),
-		url('Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
-		url('Montserrat-Bold.woff') format('woff'),
-        url('Montserrat-Bold.ttf') format('truetype');
+		url('Montserrat-Bold.woff') format('woff');
     /* @endif */
 	font-weight: 700;
 	font-style: normal;
@@ -43,18 +31,12 @@
 @font-face {
     font-family: 'Montserrat';
     /* @if NODE_ENV=='development' */
-	src: url('../fonts/Montserrat-Regular.eot');
 	src: local('Montserrat Regular'), local('Montserrat-Regular'),
-		url('../fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Montserrat-Regular.woff') format('woff'),
-        url('../fonts/Montserrat-Regular.ttf') format('truetype');
+		url('../fonts/Montserrat-Regular.woff') format('woff');
     /* @endif */
     /* @if NODE_ENV=='production' */
-    src: url('Montserrat-Regular.eot');
 	src: local('Montserrat Regular'), local('Montserrat-Regular'),
-		url('Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
-		url('Montserrat-Regular.woff') format('woff'),
-        url('Montserrat-Regular.ttf') format('truetype');
+		url('Montserrat-Regular.woff') format('woff');
     /* @endif */
 	font-weight: 400;
 	font-style: normal;

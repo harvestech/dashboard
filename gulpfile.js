@@ -38,6 +38,7 @@ var path = {
       root: 'src/',
       html: 'src/html/**/*.html',
       fonts: 'src/fonts/*.*',
+      woff: 'src/fonts/*.woff',
       inc: 'src/html/includes/',
       js: 'src/js/**/*.js',
       scripts: 'src/js/**/*.js',
@@ -116,7 +117,7 @@ gulp.task('html:prod', function() {
 
 // Копирование файлов fonts в папку продакшена
 gulp.task("fonts", function() {
-  return gulp.src(path.src.fonts)
+  return gulp.src(path.src.woff)
   .pipe(gulp.dest(path.build.fonts));
 });
 

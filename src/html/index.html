@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="apple-icon.png">
+  <!-- @if NODE_ENV='development' -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <!-- @endif -->
+  <!-- @if NODE_ENV='production' -->
   <link rel="icon" type="image/png" href="favicon.png">
+  <!-- @endif -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     HASVESTECH - Панель управления
@@ -42,7 +47,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-bulb-63 text-warning"></i>
+                      <i class="nc-icon icon-peptide text-warning"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -56,7 +61,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Период обновления: 1 сек.
+                  <i class="nc-icon spin icon-spin"></i> Период обновления: 1 сек.
                 </div>
               </div>
             </div>
@@ -67,7 +72,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-bulb-63 text-success"></i>
+                      <i class="nc-icon icon-lightning-bolt text-success"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -81,7 +86,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Период обновления: 1 сек.
+                  <i class="nc-icon spin icon-spin"></i> Период обновления: 1 сек.
                 </div>
               </div>
             </div>
@@ -92,7 +97,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-bulb-63 text-danger"></i>
+                      <i class="nc-icon icon-temperature text-danger"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -106,7 +111,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Период обновления: 1 сек.
+                  <i class="nc-icon spin icon-spin"></i> Период обновления: 1 сек.
                 </div>
               </div>
             </div>
@@ -117,7 +122,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-watch-time text-primary"></i>
+                      <i class="nc-icon icon-clock text-primary"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -131,7 +136,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-timer-0"></i> Время работы: <span id="runtime">...</span>
+                  <i class="nc-icon icon-clock-1"></i> Время работы: <span id="runtime">...</span>
                 </div>
               </div>
             </div>
@@ -151,7 +156,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-history"></i> Период обновления: 1 мин.
+                  <i class="nc-icon spin icon-spin"></i> Период обновления: 1 мин.
                 </div>
               </div>
             </div>
@@ -164,16 +169,16 @@
                 <h5 class="card-title">Активность насосов</h5>
               </div>
               <div class="card-body text-center">
-                <div class="inline"><i id="pumpState1" class="fa fa-circle text-danger"></i> <h6 class="pump inline">PH (&uarr;)</h6></div>
-                <div class="inline"><i id="pumpState2" class="fa fa-circle text-danger"></i> <h6 class="pump inline">PH (&darr;)</h6></div>
-                <div class="inline"><i id="pumpState3" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение А</h6></div>
-                <div class="inline"><i id="pumpState4" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение B</h6></div>
-							  <div class="inline"><i id="pumpState5" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Удобрение C</h6></div>
+                <div class="inline"><i id="pumpState1" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">PH (&uarr;)</h6></div>
+                <div class="inline"><i id="pumpState2" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">PH (&darr;)</h6></div>
+                <div class="inline"><i id="pumpState3" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">Удобр.А</h6></div>
+                <div class="inline"><i id="pumpState4" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">Удобр.B</h6></div>
+							  <div class="inline"><i id="pumpState5" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">Удобр.C</h6></div>
               </div>
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-check"></i> Информация актуальна
+                  <i class="nc-icon spin icon-spin-1"></i> Информация актуальна
                 </div>
               </div>
             </div>
@@ -184,13 +189,13 @@
                 <h5 class="card-title">Активность нагрузок</h5>
               </div>
               <div class="card-body text-center">
-                <div class="inline"><i id="powerState1" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Нагрузка 1</h6></div>
-                <div class="inline"><i id="powerState2" class="fa fa-circle text-danger"></i> <h6 class="pump inline">Нагрузка 2</h6></div>
+                <div class="inline"><i id="powerState1" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">Нагрузка 1</h6></div>
+                <div class="inline"><i id="powerState2" class="nc-icon icon-status text-danger"></i> <h6 class="pump inline">Нагрузка 2</h6></div>
               </div>
               <div class="card-footer">
                 <hr/>
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Информация актуальна  
+                <div class="stats">
+                  <i class="nc-icon spin icon-spin-1"></i> Информация актуальна  
                 </div>
               </div>
             </div>
@@ -231,6 +236,7 @@
   <script src="js/charts/c3.js"></script>
   <script src="js/charts/d3.v5.js"></script>
   <script src="js/arduino.js"></script>
+  <script src="js/main.js"></script>
   <!-- @endif -->
 
   <!-- @if NODE_ENV='production' -->

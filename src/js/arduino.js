@@ -22,8 +22,10 @@ function process(){
 function parsePumps(pumpsArray){
     var pumpStateArr = ["pumpState1", "pumpState2", "pumpState3", "pumpState4", "pumpState5"];
     for (var i = 0; i < pumpsArray.length; i++) {
-        var pump = parseInt(pumpsArray[i]);
-        document.getElementById(pumpStateArr[i]).className = pump ? "fa fa-circle text-success" : "fa fa-circle text-danger";
+		var pump = parseInt(pumpsArray[i]);
+		document.getElementById(pumpStateArr[i]).classList.remove('text-success');
+		document.getElementById(pumpStateArr[i]).classList.remove('text-danger');
+		document.getElementById(pumpStateArr[i]).classList.add(pump ? "text-success" : "text-danger");
     }
 }
 
@@ -31,8 +33,10 @@ function parsePumps(pumpsArray){
 function parsePowers(powersArray){
     var powerStateArr = ["powerState1", "powerState2"];
     for (var i = 0; i < powersArray.length; i++) {
-        var power = parseInt(powersArray[i]);
-        document.getElementById(powerStateArr[i]).className = power ? "fa fa-circle text-success" : "fa fa-circle text-danger";
+		var power = parseInt(powersArray[i]);
+		document.getElementById(powerStateArr[i]).classList.remove('text-success');
+		document.getElementById(powerStateArr[i]).classList.remove('text-danger');
+        document.getElementById(powerStateArr[i]).classList.add(power ? "text-success" : "text-danger");
     }
 }
 
