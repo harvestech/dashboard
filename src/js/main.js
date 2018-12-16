@@ -1,6 +1,25 @@
 main = {
-
   initWizard: function() {
+    //Русская локализация
+    $.extend( $.validator.messages,  {
+      required: "Это поле необходимо заполнить.",
+      remote: "Пожалуйста, введите правильное значение.",
+      email: "Пожалуйста, введите корректный адрес электронной почты.",
+      url: "Пожалуйста, введите корректный URL.",
+      date: "Пожалуйста, введите корректную дату.",
+      dateISO: "Пожалуйста, введите корректную дату в формате ISO.",
+      number: "Пожалуйста, введите число.",
+      digits: "Пожалуйста, вводите только цифры.",
+      creditcard: "Пожалуйста, введите правильный номер кредитной карты.",
+      equalTo: "Пожалуйста, введите такое же значение ещё раз.",
+      extension: "Пожалуйста, выберите файл с правильным расширением.",
+      maxlength: $.validator.format( "Пожалуйста, введите не больше {0} символов." ),
+      minlength: $.validator.format( "Пожалуйста, введите не меньше {0} символов." ),
+      rangelength: $.validator.format( "Пожалуйста, введите значение длиной от {0} до {1} символов." ),
+      range: $.validator.format( "Пожалуйста, введите число от {0} до {1}." ),
+      max: $.validator.format( "Пожалуйста, введите число, меньшее или равное {0}." ),
+      min: $.validator.format( "Пожалуйста, введите число, большее или равное {0}." )
+    });
     // Code for the Validator
     var $validator = $('.card-wizard form').validate({
       rules: {
@@ -266,7 +285,34 @@ main = {
   /*
   =============УВЕДОМЛЕНИЯ==============
   */
- showNotificationByCode: function(code, type) {
+ 	/* Функция поллучения уведомлений из notifi.json */
+  updateNotifications: function() {
+    var messages = new Array();
+    $.getJSON("notifi.json", function (jsonData) {
+      $.each(jsonData, function(idx, obj) {
+          if(obj.status) {
+            var elemsNotifyClass = document.getElementById('notifyClass').getElementsByTagName('*');
+            var unique = true;
+            for(var i=0; i<elemsNotifyClass.length; i++) {
+              if(elemsNotifyClass[i].innerHTML==obj.text) {
+                unique = false;
+              }
+            }
+          if(unique) {
+            var notifi = document.createElement("A");      
+            notifi.className = "dropdown-item";
+            notifi.onclick = function (onclick) { 
+              main.showNotificationByCode(obj.code, obj.type);
+            };        
+            notifi.innerHTML = obj.text;                          
+            document.getElementById("notifyClass").appendChild(notifi);
+          }
+        }
+      });
+    });
+  },
+
+  showNotificationByCode: function(code, type) {
    var options = {
      from: 'bottom',
      align: 'right',
@@ -328,3 +374,6 @@ main = {
     });
   }
 };
+$(function() {
+  setInterval(function(){ main.updateNotifications(); }, 10000);
+});

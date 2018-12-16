@@ -40,6 +40,8 @@ function parsePowers(powersArray){
     }
 }
 
+
+
 function handleServerResponse(){
     if(xmlHttp.readyState==4 && xmlHttp.status==200){
        //JSON
@@ -60,9 +62,8 @@ function handleServerResponse(){
         }
      }
    }
-
-
-/* Функция обновления и настроек графика из graph.json */
+   
+	/* Функция обновления и настроек графика из graph.json */
     updateChart('graph.json');
 	function updateChart(sourcefile) {
 		$.getJSON(sourcefile, function (externaldata) {

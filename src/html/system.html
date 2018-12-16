@@ -27,7 +27,7 @@
   <!-- @endif --> 
 </head>
 
-<body onload="process();" class="">
+<body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
     <partial src="_sidebar.html" system-page="active"></partial>
@@ -41,18 +41,18 @@
       </div> -->
       <div class="content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card ">
               <div class="card-header ">
                 <h4 class="card-title">Данные для входа в панель</h4>
               </div>
               <div class="card-body ">
                 <form method="#" action="#">
-                  <label>Логин</label>
+                  <!--<label>Логин</label>-->
                   <div class="form-group">
                     <input type="email" class="form-control" placeholder="Введите логин">
                   </div>
-                  <label>Пароль</label>
+                  <!--<label>Пароль</label>-->
                   <div class="form-group">
                     <input type="password" class="form-control" placeholder="Введите пароль">
                   </div>
@@ -63,20 +63,20 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="card ">
               <div class="card-header ">
                 <h4 class="card-title">Параметры точки доступа</h4>
               </div>
               <div class="card-body ">
                 <form method="#" action="#">
-                  <label>Имя (SSID)</label>
+                  <!--<label>Имя (SSID)</label>-->
                   <div class="form-group">
-                    <input type="email" class="form-control" placeholder="HASVESTECH">
+                    <input type="email" class="form-control" placeholder="Имя точки (SSID)">
                   </div>
-                  <label>Пароль</label>
+                  <!--<label>Пароль</label>-->
                   <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Введите пароль">
+                    <input type="password" class="form-control" placeholder="Пароль">
                   </div>
                 </form>
               </div>
@@ -84,9 +84,7 @@
                 <button type="submit" class="btn btn-info btn-round">Применить</button>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
+          </div>        
           <div class="col-md-4">
             <div class="card ">
               <div class="card-header ">
@@ -99,6 +97,10 @@
               </div>
             </div>
           </div>
+        </div>          
+
+        <div class="row">
+
         </div>
       </div>
       <footer class="footer footer-black  footer-white ">
