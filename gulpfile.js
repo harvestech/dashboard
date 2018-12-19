@@ -60,7 +60,7 @@ var webserver = {
       server: {
           baseDir: './src'
       },
-      tunnel: true,
+      tunnel: false,
       host: 'localhost',
       port: 9001,
       logPrefix: 'app_dev'
@@ -162,34 +162,28 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));
 
-  //Для master.html
-  gulp.src('src/js/plugins/bootstrap-datetimepicker.js')
+  //Для system.html
+  gulp.src('src/js/plugins/moment.min.js')
+    .pipe(addsrc.append('src/js/plugins/bootstrap-datetimepicker.js'))
     .pipe(concat('system.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));
 
   //Для master.html
-  gulp.src('js/plugins/moment.min.js')
-    .pipe(addsrc.append('src/js/plugins/jquery.bootstrap-wizard.js'))
+  gulp.src('src/js/plugins/jquery.bootstrap-wizard.js')
     .pipe(addsrc.append('src/js/plugins/jquery.validate.min.js'))
     .pipe(concat('master.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));
 
   gulp.src('src/js/core/jquery.min.js')
-    //.pipe(addsrc.append('src/js/core/popper.min.js'))
     .pipe(addsrc.append('src/js/core/bootstrap.min.js'))
     .pipe(addsrc.append('src/js/plugins/perfect-scrollbar.jquery.min.js'))
-    //.pipe(addsrc.append('src/js/plugins/bootstrap-datetimepicker.js')) //Нужен только для страницы system.html
-    //.pipe(addsrc.append('src/js/plugins/jquery.bootstrap-wizard.js')) //Нужен только для страницы master.html
-    //.pipe(addsrc.append('src/js/plugins/jquery.validate.min.js')) //Нужен только для страницы master.html
+    .pipe(addsrc.append('src/js/plugins/jquery.mobile.custom.js'))
     .pipe(addsrc.append('src/js/plugins/bootstrap-notify.js'))
     .pipe(addsrc.append('src/js/paper-dashboard.js'))
-    //.pipe(addsrc.append('src/js/charts/c3.js')) //Нужен только для страницы index.html
-    //.pipe(addsrc.append('src/js/charts/d3.v5.js')) //Нужен только для страницы index.html
-    .pipe(addsrc.append('src/js/arduino.js'))//Нужен только для страницы index.html
+    .pipe(addsrc.append('src/js/arduino.js'))
     .pipe(addsrc.append('src/js/main.js'))
-
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));

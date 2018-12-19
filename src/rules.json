@@ -1,0 +1,4 @@
+[
+  { "code":1, "type":"error", "status": 1, "text": "Уведомление #1(JSON)"},
+  { "code":10, "type":"info",  "status": 1, "text": "Уведомление #2(JSON)"}
+]

@@ -10,13 +10,14 @@ function createXmlHttpObject(){
 }
 
 function process(){
- if(xmlHttp.readyState==0 || xmlHttp.readyState==4){
-   xmlHttp.open('GET','test.json',true);
-   xmlHttp.onreadystatechange=handleServerResponse;
-   xmlHttp.send(null);
- }
- setTimeout('process()',1000);
+	if(xmlHttp.readyState==0 || xmlHttp.readyState==4){
+	  xmlHttp.open('GET','test.json',true);
+	  xmlHttp.onreadystatechange=handleServerResponse;
+	  xmlHttp.send(null);
+	}
+	setTimeout('process()',1500);
 }
+
 
 /* Функция парсинга массива JSON насосов и изменения элементов управления pumpState на странице */
 function parsePumps(pumpsArray){
@@ -64,7 +65,6 @@ function handleServerResponse(){
    }
    
 	/* Функция обновления и настроек графика из graph.json */
-    updateChart('graph.json');
 	function updateChart(sourcefile) {
 		$.getJSON(sourcefile, function (externaldata) {
 		chart = c3.generate({
@@ -134,4 +134,7 @@ function handleServerResponse(){
 		})
 		});	
 	}
+$(function() {
+	updateChart('graph.json');
 	setInterval(function(){ updateChart('graph.json'); }, 60000);
+});

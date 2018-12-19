@@ -81,6 +81,22 @@ $(document).ready(function() {
   });
 });
 
+$(document).on('swiperight swipeleft', function(e) {
+  if (e.type === "swiperight" & paperDashboard.misc.navbar_menu_visible == 0) {
+    setTimeout(function() {
+      $('.navbar-toggle').addClass('toggled');
+    }, 100);
+    $('html').addClass('nav-open');
+    paperDashboard.misc.navbar_menu_visible = 1;
+  } else if (e.type === "swipeleft" & paperDashboard.misc.navbar_menu_visible == 1) {
+    setTimeout(function() {
+      $('.navbar-toggle').removeClass('toggled');
+    }, 100); 
+    $('html').removeClass('nav-open');
+    paperDashboard.misc.navbar_menu_visible = 0;
+  }
+});
+
 $(document).on('click', '.navbar-toggle', function() {
   $toggle = $(this);
 
