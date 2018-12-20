@@ -22,6 +22,8 @@
 @import "paper-dashboard/plugins/plugin-animate-bootstrap-notify";
 @import "paper-dashboard/plugins/plugin-perfect-scrollbar";
 @import "paper-dashboard/plugins/plugin-datetimepicker";
+@import "paper-dashboard/plugins/bootstrap-switch";
+@import "paper-dashboard/plugins/bootstrap-select";
 
 // Core CSS
 @import "paper-dashboard/buttons";
@@ -60,3 +62,7 @@
 // addition libs
 @import "additional/main";
 @import "additional/c3";
+
+
+// components
+//@import "node_modules/bootstrap/scss/bootstrap";

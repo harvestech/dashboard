@@ -38,8 +38,52 @@
       <!-- End Navbar -->
       <!-- <div class="panel-header panel-header-lg">
               <canvas id="bigDashboardChart"></canvas>
+              <label class="switch">
+                                  <input type="checkbox">
+                                  <span class="slider"></span>
+                              </label>
       </div> -->
       <div class="content">
+        <div class="col-xl-6 col-md-12 col-sm-12">
+          <div class="row">
+                <div class="card ">
+                  <div class="card-header ">
+                    <h5 class="card-title">Ручное управление насосами</h5>
+                  </div>
+                  <div class="card-body ">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                              <select class="selectpicker" data-size="10" data-style="btn btn-primary btn-round" title="Выберите насос">
+                                <option value="1">PH up</option>
+                                <option value="2">PH down</option>
+                                <option value="3">Компонент А</option>
+                                <option value="4">Компонент B</option>
+                                <option value="5">Компонент C</option>
+                              </select>
+                            </div> 
+                        </div> 
+                      <div class="row">       
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <label for="1_nasos" class="input-group-text" id="basic-addon3" style ="margin-bottom:0;font-size:16px; border-radius: 16px 0 0 16px;" >Время запуска:</label>
+                              </div>
+                              <input type="number" class="form-control" aria-describedby="basic-addon3" value="1000" id="1_nasos" style="opacity:100;color:black;font-size: 16px; border-radius: 0 16px 16px 0;">
+                            </div>
+                      </div>
+                    </div> 
+                    <div class="row">   
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <button class="btn btn-success" style= "width: 100%; border-radius: 16px 16px 16px 16px; line-height: 1.25em;">Запуск</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    Внимание! Запуск насоса в ручном режиме останавливает его текущую работу на указанное время!
+                  </div>
+                </div>
+              </div>
+            </div>  
       </div>
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
@@ -71,6 +115,8 @@
   <script src="js/core/bootstrap.min.js"></script>
   <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
+  <script src="js/plugins/bootstrap-select.js"></script>
+
   <script src="js/plugins/bootstrap-notify.js"></script>
   <script src="js/paper-dashboard.js"></script>
   <script src="js/charts/c3.js"></script>
@@ -83,6 +129,8 @@
   <script src="scripts.js"></script>
   <script src="pumps.js"></script>
   <!-- @endif -->
-
+  <script>
+    $('select').selectpicker();
+  </script>
 </body>
 </html>

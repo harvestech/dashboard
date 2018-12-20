@@ -63,6 +63,12 @@
         bottom: 0 !important;
     }
 
+    li:first-child {
+        a:hover{
+          border-radius: 12px 12px 0 0;
+        }
+      }
+
     li:last-child {
       a:hover{
         border-radius: 0 0 12px 12px;

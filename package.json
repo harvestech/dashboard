@@ -6,6 +6,7 @@
   "author": "Vladislav I",
   "license": "ISC",
   "devDependencies": {
+    "bootstrap": "^4.1.3",
     "browser-sync": "^2.26.3",
     "del": "^3.0.0",
     "gulp": "^3.9.1",

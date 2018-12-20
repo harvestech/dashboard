@@ -24,9 +24,11 @@ function parsePumps(pumpsArray){
     var pumpStateArr = ["pumpState1", "pumpState2", "pumpState3", "pumpState4", "pumpState5"];
     for (var i = 0; i < pumpsArray.length; i++) {
 		var pump = parseInt(pumpsArray[i]);
-		document.getElementById(pumpStateArr[i]).classList.remove('text-success');
-		document.getElementById(pumpStateArr[i]).classList.remove('text-danger');
-		document.getElementById(pumpStateArr[i]).classList.add(pump ? "text-success" : "text-danger");
+		if(document.getElementById(pumpStateArr[i]) != null) {
+			document.getElementById(pumpStateArr[i]).classList.remove('text-success');
+			document.getElementById(pumpStateArr[i]).classList.remove('text-danger');
+			document.getElementById(pumpStateArr[i]).classList.add(pump ? "text-success" : "text-danger");
+		}
     }
 }
 
@@ -35,29 +37,36 @@ function parsePowers(powersArray){
     var powerStateArr = ["powerState1", "powerState2"];
     for (var i = 0; i < powersArray.length; i++) {
 		var power = parseInt(powersArray[i]);
-		document.getElementById(powerStateArr[i]).classList.remove('text-success');
-		document.getElementById(powerStateArr[i]).classList.remove('text-danger');
-        document.getElementById(powerStateArr[i]).classList.add(power ? "text-success" : "text-danger");
+		if(document.getElementById(powerStateArr[i]) != null) {
+			document.getElementById(powerStateArr[i]).classList.remove('text-success');
+			document.getElementById(powerStateArr[i]).classList.remove('text-danger');
+			document.getElementById(powerStateArr[i]).classList.add(power ? "text-success" : "text-danger");
+		}
     }
 }
 
-
+function setHtmlValuesFromJson (jsonData) {
+		$.each(jsonData, function(key, value){
+			if (document.getElementById(key)!=null) {
+				//if(value instanceof Integer){
+				document.getElementById(key).innerHTML=value;
+			}
+		});
+}
 
 function handleServerResponse(){
     if(xmlHttp.readyState==4 && xmlHttp.status==200){
        //JSON
         try {
-            var myObj = JSON.parse(xmlHttp.responseText);
-            
-            document.getElementById('nowtime').innerHTML=myObj.nowtime;
-            document.getElementById('runtime').innerHTML=myObj.runtime;
+			var myObj = JSON.parse(xmlHttp.responseText);
+			
+			if(myObj != null) {
 
-            document.getElementById('now_temp').innerHTML=myObj.now_temp;
-            document.getElementById('now_ph').innerHTML=myObj.now_ph;
-            document.getElementById('now_ec').innerHTML=myObj.now_ec;
+				setHtmlValuesFromJson (myObj);
             
-            parsePumps(myObj.pumps);
-            parsePowers(myObj.powers);
+            	parsePumps(myObj.pumps);
+				parsePowers(myObj.powers);
+			}
         } catch(e) {
            console.log(e); // error in the above string (in this case, yes)!
         }

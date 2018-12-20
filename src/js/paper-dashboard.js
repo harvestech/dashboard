@@ -91,8 +91,9 @@ $(document).on('swiperight swipeleft', function(e) {
   } else if (e.type === "swipeleft" & paperDashboard.misc.navbar_menu_visible == 1) {
     setTimeout(function() {
       $('.navbar-toggle').removeClass('toggled');
+      $('html').removeClass('nav-open');
     }, 100); 
-    $('html').removeClass('nav-open');
+    
     paperDashboard.misc.navbar_menu_visible = 0;
   }
 });
