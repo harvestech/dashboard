@@ -336,6 +336,18 @@
       "search": [
         "about"
       ]
+    },
+    {
+      "uid": "12f4ece88e46abd864e40b35e05b11cd",
+      "css": "ok",
+      "code": 59422,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "5211af474d3a9848f67f945e2ccaf143",
+      "css": "cancel-1",
+      "code": 59423,
+      "src": "fontawesome"
     }
   ]
 }

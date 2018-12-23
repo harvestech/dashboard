@@ -11,7 +11,7 @@ function createXmlHttpObject(){
 
 function process(){
 	if(xmlHttp.readyState==0 || xmlHttp.readyState==4){
-	  xmlHttp.open('GET','test.json',true);
+	  xmlHttp.open('GET','json',true);
 	  xmlHttp.onreadystatechange=handleServerResponse;
 	  xmlHttp.send(null);
 	}
@@ -75,6 +75,8 @@ function handleServerResponse(){
    
 	/* Функция обновления и настроек графика из graph.json */
 	function updateChart(sourcefile) {
+		var bind = '#chart';
+		if(document.getElementById(bind) != null) {
 		$.getJSON(sourcefile, function (externaldata) {
 		chart = c3.generate({
 			size: {
@@ -86,7 +88,7 @@ function handleServerResponse(){
 			point: {
 				show: true
 			},
-			bindto: '#chart',
+			bindto: bind,
 			data: {
 			    json: externaldata,
 				x: 'Time',
@@ -142,6 +144,7 @@ function handleServerResponse(){
 			}
 		})
 		});	
+	}
 	}
 $(function() {
 	updateChart('graph.json');

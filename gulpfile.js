@@ -162,6 +162,14 @@ gulp.task('scripts', function() {
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));
 
+  //Для regulator.html
+  gulp.src('src/js/charts/c3.js')
+  .pipe(addsrc.append('src/js/plugins/x-editable.js'))
+  .pipe(concat('regulator.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest(path.build.js));
+
+
   //Для system.html
   gulp.src('src/js/plugins/moment.min.js')
     .pipe(addsrc.append('src/js/plugins/bootstrap-datetimepicker.js'))

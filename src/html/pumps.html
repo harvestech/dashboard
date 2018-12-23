@@ -53,7 +53,7 @@
                   <div class="card-body ">
                       <div class="row">
                           <div class="col-lg-12 col-md-12 col-sm-12">
-                              <select class="selectpicker" data-size="10" data-style="btn btn-primary btn-round" title="Выберите насос">
+                              <select class="selectpicker" style="line-height: 1.25em;" data-size="10" data-style="btn btn-primary btn-round" title="Выберите насос">
                                 <option value="1">PH up</option>
                                 <option value="2">PH down</option>
                                 <option value="3">Компонент А</option>
@@ -64,17 +64,18 @@
                         </div> 
                       <div class="row">       
                       <div class="col-lg-12 col-md-12 col-sm-12">
-                          <div class="input-group mb-3">
+                          <!--<div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <label for="1_nasos" class="input-group-text" id="basic-addon3" style ="margin-bottom:0;font-size:16px; border-radius: 16px 0 0 16px;" >Время запуска:</label>
                               </div>
                               <input type="number" class="form-control" aria-describedby="basic-addon3" value="1000" id="1_nasos" style="opacity:100;color:black;font-size: 16px; border-radius: 0 16px 16px 0;">
-                            </div>
+                            </div>-->
+                            <input data-prefix="Время (сек):" value="10" data-decimals="0" min="0" max="600" step="10" type="number" />
                       </div>
                     </div> 
                     <div class="row">   
                       <div class="col-lg-12 col-md-12 col-sm-12">
-                        <button class="btn btn-success" style= "width: 100%; border-radius: 16px 16px 16px 16px; line-height: 1.25em;">Запуск</button>
+                        <button class="btn btn-success btn-round" style= "width: 100%; line-height: 1.25em;">Запуск</button>
                       </div>
                     </div>
                   </div>
@@ -117,10 +118,12 @@
 
   <script src="js/plugins/bootstrap-select.js"></script>
 
+  <script src="js/plugins/bootstrap-spinner.js"></script>
+
+  <script src="js/plugins/jquery.mobile.custom.js"></script>
+  
   <script src="js/plugins/bootstrap-notify.js"></script>
   <script src="js/paper-dashboard.js"></script>
-  <script src="js/charts/c3.js"></script>
-  <script src="js/charts/d3.v5.js"></script>
   <script src="js/arduino.js"></script>
   <script src="js/main.js"></script>
   <!-- @endif -->
@@ -131,6 +134,7 @@
   <!-- @endif -->
   <script>
     $('select').selectpicker();
+    $("input[type='number']").inputSpinner();
   </script>
 </body>
 </html>

@@ -16,7 +16,13 @@
     margin: 0 0.2em 0 0.01em;
 }
 
+//Размер графика
 .c3-legend-item-tile {
     width: 20px;
-    height: 20px;
-  }
+    height: 20px;  
+}
+// Стиль для x-editable input
+.table-input {
+    max-width: 100px !important;
+    text-align: center;
+}

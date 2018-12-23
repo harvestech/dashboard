@@ -42,7 +42,7 @@
       <div class="content">
         <!-- Editable table -->
 <div class="card">
-    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
+    <h3 class="card-header text-center">Параметры системы</h3>
     <div class="card-body">
       <div id="table" class="table-editable">
         <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fa fa-plus fa-2x"
@@ -54,11 +54,9 @@
             <th class="text-center">Максимум</th>
           </tr>
           <tr>
-            <td class="pt-3-half" contenteditable="false">PH</td>
-            <td class="pt-3-half" contenteditable="true">1.3</td>
-            <td class="pt-3-half" contenteditable="true">5</td>
-            <!--<td class="pt-3-half" contenteditable="true">Spain</td>
-            <td class="pt-3-half" contenteditable="true">Madrid</td>
+            <td class="pt-3-half" contenteditable="false" style="width: 10%;">PH</td>
+            <td class="pt-3-half" id="ph-min" data-placement="left">1.3</td>
+            <td class="pt-3-half" id="ph-max" data-placement="right">5</td>
             <td class="pt-3-half">
               <span class="table-up"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a></span>
               <span class="table-down"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-down"
@@ -66,15 +64,13 @@
             </td>
             <td>
               <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
-            </td>-->
+            </td>
           </tr>
           <!-- This is our clonable table line -->
           <tr>
             <td class="pt-3-half" contenteditable="false">EC</td>
-            <td class="pt-3-half" contenteditable="true">2.1</td>
-            <td class="pt-3-half" contenteditable="true">3</td>
-            <!--<td class="pt-3-half" contenteditable="true">USA</td>
-            <td class="pt-3-half" contenteditable="true">San Francisco</td>
+            <td class="pt-3-half" id="ec-min" data-placement="left">2.1</td>
+            <td class="pt-3-half" id="ec-max" data-placement="right">3</td>
             <td class="pt-3-half">
               <span class="table-up"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a></span>
               <span class="table-down"><a href="#!" class="indigo-text"><i class="fa fa-long-arrow-down"
@@ -82,35 +78,27 @@
             </td>
             <td>
               <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></span>
-            </td>-->
+            </td>
           </tr>
         </table>
       </div>
     </div>
+    <div class="card-footer ">
+        <button type="submit" class="btn btn-info btn-round">Применить</button>
+    </div>
   </div>
   <!-- Editable table -->
-      </div>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <nav class="footer-nav">
-              <ul>
-                <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Our site</a>
-                </li>
-              </ul>
-            </nav>
-            <div class="credits ml-auto">
-              <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, made by Vladislav I.
-              </span>
-            </div>
-          </div>
+        <div>
+          <span>Username:</span>
+          <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
         </div>
-      </footer>
+        
+        <div>
+          <span>Status:</span>
+          <a href="#" id="status"></a>
+        </div>
+<!-- Editable table -->
+      </div>
     </div>
   </div>
   <!--   Core JS Files   -->
@@ -119,11 +107,10 @@
   <script src="js/core/popper.min.js"></script>
   <script src="js/core/bootstrap.min.js"></script>
   <script src="js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
+  <script src="js/plugins/jquery.mobile.custom.js"></script>
+  <script src="js/plugins/x-editable.js"></script>
   <script src="js/plugins/bootstrap-notify.js"></script>
   <script src="js/paper-dashboard.js"></script>
-  <script src="js/charts/c3.js"></script>
-  <script src="js/charts/d3.v5.js"></script>
   <script src="js/arduino.js"></script>
   <script src="js/main.js"></script>
   <!-- @endif -->
@@ -134,61 +121,43 @@
   <!-- @endif -->
 
   <script>
-  var $TABLE = $('#table');
-  var $BTN = $('#export-btn');
-  var $EXPORT = $('#export');
+  $(document).ready(function() {
+    //toggle `popup` / `inline` mode
+    $.fn.editable.defaults.mode = 'popup';     
+    var minMaxConfig = {
+      mode: 'inline',
+      type: 'number',
+      step: '0.01',
+      min: '0.00',
+      max: '24',
+      inputclass: 'table-input',
+      emptytext: 'Пусто'
+    }
 
-  $('.table-add').click(function () {
-  var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
-  $TABLE.find('table').append($clone);
-  });
+    $('#ph-min').editable(minMaxConfig);
+    $('#ph-max').editable(minMaxConfig);
+    $('#ec-min').editable(minMaxConfig);
+    $('#ec-max').editable(minMaxConfig);
 
-  $('.table-remove').click(function () {
-  $(this).parents('tr').detach();
-  });
-
-  $('.table-up').click(function () {
-  var $row = $(this).parents('tr');
-  if ($row.index() === 1) return; // Don't go above the header
-  $row.prev().before($row.get(0));
-  });
-
-  $('.table-down').click(function () {
-  var $row = $(this).parents('tr');
-  $row.next().after($row.get(0));
-  });
-
-  // A few jQuery helpers for exporting only
-  jQuery.fn.pop = [].pop;
-  jQuery.fn.shift = [].shift;
-
-  $BTN.click(function () {
-  var $rows = $TABLE.find('tr:not(:hidden)');
-  var headers = [];
-  var data = [];
-
-  // Get the headers (add special header logic here)
-  $($rows.shift()).find('th:not(:empty)').each(function () {
-  headers.push($(this).text().toLowerCase());
-  });
-
-  // Turn all existing rows into a loopable array
-  $rows.each(function () {
-  var $td = $(this).find('td');
-  var h = {};
-
-  // Use the headers from earlier to name our hash keys
-  headers.forEach(function (header, i) {
-  h[header] = $td.eq(i).text();
-  });
-
-  data.push(h);
-  });
-
-  // Output the result
-  $EXPORT.text(JSON.stringify(data));
-  });
+    //make status editable
+    $('#status').editable({
+        type: 'select',
+        title: 'Select status',
+        placement: 'right',
+        value: 2,
+        source: [
+            {value: 1, text: 'status 1'},
+            {value: 2, text: 'status 2'},
+            {value: 3, text: 'status 3'}
+        ]
+        /*
+        //uncomment these lines to send data on server
+        ,pk: 1
+        ,url: '/post'
+        */
+    });
+});
 </script>
-</body>
 
+</body>
 </html>
