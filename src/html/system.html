@@ -41,6 +41,116 @@
       </div> -->
       <div class="content">
         <div class="row">
+          <div class="col-md-6">
+            <div class="card ">
+              <div class="card-header ">
+                <h4 class="card-title">Основные настройки</h4>
+              </div>
+              <div class="card-body ">
+                <form class="form-horizontal" action="" method="post" id="form_dname">
+                  <div class="row">
+                    <label class="col-md-4 col-form-label">Имя устройства</label>
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="devicename" name="devicename" placeholder="Введите имя">
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <label class="col-md-3"></label>
+                      <div class="col-md-9">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input"  id="wwwauth" name="wwwauth" type="checkbox">
+                            <span class="form-check-sign"></span>
+                            Использовать авторизацию
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="row">
+                      <label class="col-md-3 col-form-label">Логин</label>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="wwwname" name="wwwname" placeholder="Введите логин">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="row">
+                      <label class="col-md-3 col-form-label">Пароль</label>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="wwwpass" name="wwwpass" placeholder="Введите пароль">
+                        </div>
+                      </div>
+                    </div>
+                </form>                
+              </div>
+              <div class="card-footer ">
+                <button type="submit" form="form_dname" class="btn btn-info btn-round">Применить</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+              <div class="card ">
+                <div class="card-header ">
+                  <h4 class="card-title">Horizontal Form</h4>
+                </div>
+                <div class="card-body ">
+                  <form class="form-horizontal">
+                    <div class="row">
+                      <label class="col-md-3 col-form-label">Username</label>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <label class="col-md-3 col-form-label">Email</label>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <label class="col-md-3 col-form-label">Password</label>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <label class="col-md-3"></label>
+                      <div class="col-md-9">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox">
+                            <span class="form-check-sign"></span>
+                            Remember me
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer ">
+                  <div class="row">
+                    <label class="col-md-3"></label>
+                    <div class="col-md-9">
+                      <button type="submit" class="btn btn-info btn-round">Sign in</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
           <div class="col-md-4">
             <div class="card ">
               <div class="card-header ">
@@ -121,6 +231,7 @@
   <script src="js/charts/c3.js"></script>
   <script src="js/charts/d3.v5.js"></script>
   <script src="js/arduino.js"></script>
+  <script src="js/pages/system.js"></script>
   <script src="js/main.js"></script>
   <!-- @endif -->
 

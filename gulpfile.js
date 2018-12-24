@@ -171,7 +171,8 @@ gulp.task('scripts', function() {
 
 
   //Для system.html
-  gulp.src('src/js/plugins/moment.min.js')
+  gulp.src('src/js/pages/system.js')
+    .pipe(addsrc.append('src/js/plugins/moment.min.js'))
     .pipe(addsrc.append('src/js/plugins/bootstrap-datetimepicker.js'))
     .pipe(concat('system.js'))
     .pipe(uglify())
