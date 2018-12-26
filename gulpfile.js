@@ -156,7 +156,8 @@ gulp.task('sass-css:prod',  function() {
 
 gulp.task('scripts', function() {
   //Для index.html
-  gulp.src('src/js/charts/c3.js')
+  gulp.src('src/js/pages/index.js')
+    .pipe(addsrc.append('src/js/charts/c3.js'))
     .pipe(addsrc.append('src/js/charts/d3.v5.js'))
     .pipe(concat('index.js'))
     .pipe(uglify())
@@ -169,11 +170,17 @@ gulp.task('scripts', function() {
   .pipe(uglify())
   .pipe(gulp.dest(path.build.js));
 
+  //Для info.html
+  gulp.src('src/js/pages/info.js')
+  .pipe(concat('info.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest(path.build.js));
 
   //Для system.html
   gulp.src('src/js/pages/system.js')
     .pipe(addsrc.append('src/js/plugins/moment.min.js'))
     .pipe(addsrc.append('src/js/plugins/bootstrap-datetimepicker.js'))
+    .pipe(addsrc.append('src/js/spark-md5.js'))
     .pipe(concat('system.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build.js));

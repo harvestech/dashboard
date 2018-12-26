@@ -356,7 +356,48 @@ Remember me</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card ">
+                                <div class="card-header ">
+                                     <h5 class="card-title">Обновление прошивки</h5>
+                                </div>
+                                <div class="card-body ">
+                                    <form method='POST' action='/update' enctype='multipart/form-data'>
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-file">
+                                                        <input id="fileName" type='file' name='update' onchange="summd5()" class="custom-file-input"
+                                                        id="firmwareFile" placeholder="Обзор..." disabled>
+                                                        <label class="custom-file-label" for="firmwareFile">Выберите файл</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input id="updateButton" type='submit' class="btn btn-danger btn-round"
+                                                    value='Обновить' disabled>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="md5row" hidden>Calculated file MD5 hash: <span id="clientHash">Select a file</span>
+                                                    <br>Size: <span id="fileSize"></span> Bytes</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Checking if remote update is possible... <span id="remupd"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td> <span id="remupdResult"></span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,6 +415,7 @@ Remember me</label>
         <script src="js/charts/d3.v5.js"></script>
         <script src="js/arduino.js"></script>
         <script src="js/pages/system.js"></script>
+        <script src="js/spark-md5.js"></script>
         <script src="js/main.js"></script>
         <script>
             $(document).ready(function() {

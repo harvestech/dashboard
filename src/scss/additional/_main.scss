@@ -26,3 +26,7 @@
     max-width: 100px !important;
     text-align: center;
 }
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Обзор";
+}
